@@ -1,315 +1,496 @@
-<?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie ie9" lang="en-US">
+<![endif]-->
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-/*
- *---------------------------------------------------------------
- * APPLICATION ENVIRONMENT
- *---------------------------------------------------------------
- *
- * You can load different configurations depending on your
- * current environment. Setting the environment also influences
- * things like logging and error reporting.
- *
- * This can be set to anything, but default usage is:
- *
- *     development
- *     testing
- *     production
- *
- * NOTE: If you change these, also change the error_reporting() code below
- */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-
-/*
- *---------------------------------------------------------------
- * ERROR REPORTING
- *---------------------------------------------------------------
- *
- * Different environments will require different levels of error reporting.
- * By default development will show errors but testing and live will hide them.
- */
-switch (ENVIRONMENT)
-{
-	case 'development':
-		error_reporting(-1);
-		ini_set('display_errors', 1);
-	break;
-
-	case 'testing':
-	case 'production':
-		ini_set('display_errors', 0);
-		if (version_compare(PHP_VERSION, '5.3', '>='))
-		{
-			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
-		}
-		else
-		{
-			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
-		}
-	break;
-
-	default:
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-		echo 'The application environment is not set correctly.';
-		exit(1); // EXIT_ERROR
-}
-
-/*
- *---------------------------------------------------------------
- * SYSTEM DIRECTORY NAME
- *---------------------------------------------------------------
- *
- * This variable must contain the name of your "system" directory.
- * Set the path if it is not in the same directory as this file.
- */
-	$system_path = 'system';
-
-/*
- *---------------------------------------------------------------
- * APPLICATION DIRECTORY NAME
- *---------------------------------------------------------------
- *
- * If you want this front controller to use a different "application"
- * directory than the default one you can set its name here. The directory
- * can also be renamed or relocated anywhere on your server. If you do,
- * use an absolute (full) server path.
- * For more info please see the user guide:
- *
- * https://codeigniter.com/user_guide/general/managing_apps.html
- *
- * NO TRAILING SLASH!
- */
-	$application_folder = 'application';
-
-/*
- *---------------------------------------------------------------
- * VIEW DIRECTORY NAME
- *---------------------------------------------------------------
- *
- * If you want to move the view directory out of the application
- * directory, set the path to it here. The directory can be renamed
- * and relocated anywhere on your server. If blank, it will default
- * to the standard location inside your application directory.
- * If you do move this, use an absolute (full) server path.
- *
- * NO TRAILING SLASH!
- */
-	$view_folder = '';
+	<title>Carmen libre y directo</title>
 
 
-/*
- * --------------------------------------------------------------------
- * DEFAULT CONTROLLER
- * --------------------------------------------------------------------
- *
- * Normally you will set your default controller in the routes.php file.
- * You can, however, force a custom routing by hard-coding a
- * specific controller class/function here. For most applications, you
- * WILL NOT set your routing here, but it's an option for those
- * special instances where you might want to override the standard
- * routing in a specific front controller that shares a common CI installation.
- *
- * IMPORTANT: If you set the routing here, NO OTHER controller will be
- * callable. In essence, this preference limits your application to ONE
- * specific controller. Leave the function name blank if you need
- * to call functions dynamically via the URI.
- *
- * Un-comment the $routing array below to use this feature
- */
-	// The directory name, relative to the "controllers" directory.  Leave blank
-	// if your controller is not in a sub-directory within the "controllers" one
-	// $routing['directory'] = '';
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,800' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
 
-	// The controller class file name.  Example:  mycontroller
-	// $routing['controller'] = '';
+	<link rel="stylesheet" href="<?php echo base_url();?>files/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>files/css/animate.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>files/css/simple-line-icons.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>files/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>files/css/style.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>files/rs-plugin/css/settings.css">
 
-	// The controller function you wish to be called.
-	// $routing['function']	= '';
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+	
+	<div class="sidebar-menu-container" id="sidebar-menu-container">
+
+		<div class="sidebar-menu-push">
+
+			<div class="sidebar-menu-overlay"></div>
+
+			<div class="sidebar-menu-inner">
+
+				<header class="site-header">
+					<div id="main-header" class="main-header header-sticky">
+						<div class="inner-header clearfix">
+							<div class="logo">
+							<img src="<?php echo base_url();?>files/images/logo.png" height="100px">
+								<a href="index-2.html"></a>
+							</div>
+							<div class="header-right-toggle pull-right hidden-md hidden-lg">
+								<a href="javascript:void(0)" class="side-menu-button"><i class="fa fa-bars"></i></a>
+							</div>
+							<nav class="main-navigation pull-right hidden-xs hidden-sm">
+								<ul>
+									<li><a href="<?php echo base_url();?>index.php/periodico/index">Inicio</a></li>
+									<li><a href="#" class="has-submenu">Secciones</a>
+										<ul class="sub-menu">
+											<li><a href="services.html">Noticia general</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/policiaco">Policiaco</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/deportes">Deportes</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/cultural">Cultural</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/social">Sociales</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/aviso">Avisos</a></li>
+										</ul>
+									</li>
+									<li><a href="#" class="has-submenu">Noticias</a>
+										<ul class="sub-menu">
+											<li><a href="<?php echo base_url();?>index.php/periodico/noticianu">Recientes</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/noticiapa">Pasadas</a></li>
+					
+										</ul>
+									</li>
+									<li><a href="<?php echo base_url();?>index.php/periodico/sobre">Acerca de nosotros</a></li>
+	
+									</li>
+									<li><a href="<?php echo base_url();?>index.php/periodico/contacto">Contacto</a></li>
+									
 
 
-/*
- * -------------------------------------------------------------------
- *  CUSTOM CONFIG VALUES
- * -------------------------------------------------------------------
- *
- * The $assign_to_config array below will be passed dynamically to the
- * config class when initialized. This allows you to set custom config
- * items or override any default config values found in the config.php file.
- * This can be handy as it permits you to share one application between
- * multiple front controller files, with each file containing different
- * config values.
- *
- * Un-comment the $assign_to_config array below to use this feature
- */
-	// $assign_to_config['name_of_config_item'] = 'value of config item';
+									</li>
+										<?php if($this->session->userdata('username')): ?>
+										<li><a href="<?=site_url('logincontrolador/logout');?>">Cerrar sesión</a></li>
+									<?php else: ?>
+										<li><a href="<?=site_url('logincontrolador');?>">Iniciar sesión</a></li>
+									<?php endif;?>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</header>
+
+				<div class="slider">
+					<div class="fullwidthbanner-container">
+						<div class="fullwidthbanner">
+							<ul>
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="<?php echo base_url();?>files/images/peña.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Y DONDE ESTA MI AGUINALDO </div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">El jefe enrique Peña dice qu elos 3 millones no le alcanza </div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class="btn btn-slider">Seguir noticia</a></div>
+								</li>
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="<?php echo base_url();?>files/images/poli.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">LOS PITUFOS HACEN DE LAS SUYAS </div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">El comandante nose que invadio y pidio mordida</div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class=" second-btn btn btn-slider">Seguir noticia</a></div>
+								</li>
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="<?php echo base_url();?>files/images/pito.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Valiente encuentro </div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Partido entre el selectivo de Quintana Roo </div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class="btn btn-slider">Seguir noticia</a></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				
+				<section class="blog-posts">
+					<div class="container">
+						<div class="section-heading">
+							<h2>Noticias</h2>
+							<div class="section-dec"></div>
+						</div>
+						<div class="blog-item">
+							<div class="col-md-4">
+								<a href="blog-single.html"><img src="<?php echo base_url();?>files/images/general.jpg" height="200px" alt=""></a>
+								<h3><a href="blog-single.html">General</a></h3>
+								<span><a href="#">Syam Kesav</a> / <a href="#">6 June 2015</a> / <a href="#">Uncategorized</a></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit alis quam est leo, imperdiet eget dictum sed, congue non erosa senean sed ligula hendrerit...</p>
+								<div class="read-more">
+									<a href="blog-single.html">Leer mas</a>
+								</div>
+							</div>
+						</div>
+						<div class="blog-item">
+							<div class="col-md-4">
+								<a href="blog-single.html"><img src="<?php echo base_url();?>files/images/policiaco.jpg" height="200px" alt=""></a>
+								<h3><a href="<?php echo base_url();?>index.php/periodico/policiaco">Policiaco</a></h3>
+								<span><a href="#">Manohar Raj</a> / <a href="#">6 June 2015</a> / <a href="#">Uncategorized</a></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit alis quam est leo, imperdiet eget dictum sed, congue non erosa senean sed ligula hendrerit...</p>
+								<div class="read-more">
+									<a href="<?php echo base_url();?>index.php/periodico/policiaco">Leer mas</a>
+								</div>
+							</div>
+						</div>
+						<div class="blog-item">
+							<div class="col-md-4">
+								<a href="blog-single.html"><img src="<?php echo base_url();?>files/images/politico.jpg" height="200px" alt=""></a>
+								<h3><a href="<?php echo base_url();?>index.php/periodico/polic">Politica</a></h3>
+								<span><a href="#">Manohar Raj</a> / <a href="#">6 June 2015</a> / <a href="#">Uncategorized</a></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit alis quam est leo, imperdiet eget dictum sed, congue non erosa senean sed ligula hendrerit...</p>
+								<div class="read-more">
+									<a href="<?php echo base_url();?>files/images/politico.jpg">Leer mas</a>
+								</div>
+							</div>
+						</div>
+							<div class="blog-item">
+							<div class="col-md-4">
+								<a href="blog-single.html"><img src="<?php echo base_url();?>files/images/deporte.jpg" height="200px" alt=""></a>
+								<h3><a href="<?php echo base_url();?>index.php/periodico/deportes">Deportes</a></h3>
+								<span><a href="#">Manohar Raj</a> / <a href="#">6 June 2015</a> / <a href="#">Uncategorized</a></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit alis quam est leo, imperdiet eget dictum sed, congue non erosa senean sed ligula hendrerit...</p>
+								<div class="read-more">
+									<a href="<?php echo base_url();?>files/images/deporte.jpg">Leer mas</a>
+								</div>
+							</div>
+						</div>
+							<div class="blog-item">
+							<div class="col-md-4">
+								<a href="blog-single.html"><img src="<?php echo base_url();?>files/images/cultural.jpg"  height="200px" alt=""></a>
+								<h3><a href="<?php echo base_url();?>index.php/periodico/cultural">Cultural</a></h3>
+								<span><a href="#">Manohar Raj</a> / <a href="#">6 June 2015</a> / <a href="#">Uncategorized</a></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit alis quam est leo, imperdiet eget dictum sed, congue non erosa senean sed ligula hendrerit...</p>
+								<div class="read-more">
+									<a href="<?php echo base_url();?>index.php/periodico/cultural">Leer mas</a>
+								</div>
+							</div>
+						</div>
+							<div class="blog-item">
+							<div class="col-md-4">
+								<a href="blog-single.html"><img src="<?php echo base_url();?>files/images/aviso.jpg" height="200px" alt=""></a>
+								<h3><a href="<?php echo base_url();?>index.php/periodico/aviso">Avisos</a></h3>
+								<span><a href="#">Manohar Raj</a> / <a href="#">6 June 2015</a> / <a href="#">Uncategorized</a></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit alis quam est leo, imperdiet eget dictum sed, congue non erosa senean sed ligula hendrerit...</p>
+								<div class="read-more">
+									<a href="<?php echo base_url();?>index.php/periodico/aviso">Leer mas</a>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+				</section>
 
 
 
-// --------------------------------------------------------------------
-// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
-// --------------------------------------------------------------------
+				
+			
+				<section class="clients">
+					<div class="container">
+						<div class="section-heading">
+							<h2>Patrocinadores</h2>
+							<div class="section-dec"></div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/01-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/02-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/03-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/04-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/05-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/06-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/07-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/08-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/09-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/10-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/11-client.png" alt=""></a>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="client-item">
+								<a href="#"><img src="<?php echo base_url();?>files/images/12-client.png" alt=""></a>
+							</div>
+						</div>
+					</div>
+				</section>
 
-/*
- * ---------------------------------------------------------------
- *  Resolve the system path for increased reliability
- * ---------------------------------------------------------------
- */
 
-	// Set the current directory correctly for CLI requests
-	if (defined('STDIN'))
-	{
-		chdir(dirname(__FILE__));
-	}
 
-	if (($_temp = realpath($system_path)) !== FALSE)
-	{
-		$system_path = $_temp.DIRECTORY_SEPARATOR;
-	}
-	else
-	{
-		// Ensure there's a trailing slash
-		$system_path = strtr(
-			rtrim($system_path, '/\\'),
-			'/\\',
-			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-		).DIRECTORY_SEPARATOR;
-	}
 
-	// Is the system path correct?
-	if ( ! is_dir($system_path))
-	{
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
-		exit(3); // EXIT_CONFIG
-	}
 
-/*
- * -------------------------------------------------------------------
- *  Now that we know the path, set the main path constants
- * -------------------------------------------------------------------
- */
-	// The name of THIS file
-	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
-	// Path to the system directory
-	define('BASEPATH', $system_path);
 
-	// Path to the front controller (this file) directory
-	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 
-	// Name of the "system" directory
-	define('SYSDIR', basename(BASEPATH));
 
-	// The path to the "application" directory
-	if (is_dir($application_folder))
-	{
-		if (($_temp = realpath($application_folder)) !== FALSE)
-		{
-			$application_folder = $_temp;
-		}
-		else
-		{
-			$application_folder = strtr(
-				rtrim($application_folder, '/\\'),
-				'/\\',
-				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-			);
-		}
-	}
-	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
-	{
-		$application_folder = BASEPATH.strtr(
-			trim($application_folder, '/\\'),
-			'/\\',
-			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-		);
-	}
-	else
-	{
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
-		exit(3); // EXIT_CONFIG
-	}
 
-	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 
-	// The path to the "views" directory
-	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
-	{
-		$view_folder = APPPATH.'views';
-	}
-	elseif (is_dir($view_folder))
-	{
-		if (($_temp = realpath($view_folder)) !== FALSE)
-		{
-			$view_folder = $_temp;
-		}
-		else
-		{
-			$view_folder = strtr(
-				rtrim($view_folder, '/\\'),
-				'/\\',
-				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-			);
-		}
-	}
-	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
-	{
-		$view_folder = APPPATH.strtr(
-			trim($view_folder, '/\\'),
-			'/\\',
-			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-		);
-	}
-	else
-	{
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
-		exit(3); // EXIT_CONFIG
-	}
 
-	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
-/*
- * --------------------------------------------------------------------
- * LOAD THE BOOTSTRAP FILE
- * --------------------------------------------------------------------
- *
- * And away we go...
- */
-require_once BASEPATH.'core/CodeIgniter.php';
+
+
+				
+
+
+
+
+	<section class="portfolio">
+					<div class="container">
+						<div class="section-heading-white">
+							<h2>Noticias recientes</h2>
+				          <div class="section-dec"></div>
+						  </div>
+						 <div class="row">
+							<div class="col-md-12">
+								<div id="owl-portfolio" class="owl-carousel owl-theme">
+								
+							
+								    <div class="item">
+								  		<figure>
+				        					<img alt="portfolio" src="<?php echo base_url();?>files/images/peña.jpg">
+				        					<figcaption>
+				            					<h3>Locavore Brooklyn</h3>
+				            					<p>Lorem ipsum dolor sit amet consectetur.</p>
+				        					</figcaption>
+				    					</figure>								    
+				    				</div>
+				    				<div class="item">
+								  		<figure>
+				        					<img alt="portfolio" src="<?php echo base_url();?>files/images/poli.jpg">
+				        					<figcaption>
+				            					<h3>Meggings Mixtape</h3>
+				            					<p>Lorem ipsum dolor sit amet consectetur.</p>
+				        					</figcaption>
+				    					</figure>								    
+				    				</div>
+								    <div class="item">
+								  		<figure>
+				        					<img alt="portfolio" src="<?php echo base_url();?>files/images/pito.jpg">
+				        					<figcaption>
+				            					<h3>Normcore Dreamcatcher</h3>
+				            					<p>Lorem ipsum dolor sit amet consectetur.</p>
+				        					</figcaption>
+				    					</figure>								    
+				    				</div>
+								</div>
+							</div>
+						</div>
+						<div class="owl-navigation">
+						  <a class="btn prev fa fa-angle-left"></a>
+						  <a class="btn next fa fa-angle-right"></a>
+						</div>
+					</div>
+				</section>
+
+
+
+
+
+
+
+
+
+                <footer class="footer">
+      <div class="three spacing"></div>
+	  <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h1>
+            <a href="index.html">
+            <img src="<?php echo base_url();?>files/images/logo.png" height="100px">
+            </a>
+          </h1>
+          <p></p>
+          <div class="spacing"></div>
+          <ul class="socials">
+            <li>
+              <a href="http://facebook.com">
+                <i class="fa fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://twitter.com">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://dribbble.com">
+                <i class="fa fa-dribbble"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://tumblr.com">
+                <i class="fa fa-tumblr"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="spacing"></div>
+        </div>
+        <div class="col-md-3">
+          <div class="spacing"></div>
+          <div class="links">
+            <h4>Menu</h4>
+            <ul>
+     								 <li><a href="index-2.html">Inicio</a></li>
+									<li><a href="#" class="has-submenu">Secciones</a>
+										<ul class="sub-menu">
+											<li><a href="services.html">Noticia general</a></li>
+											<li><a href="clients.html">Policiaco</a></li>
+											<li><a href="clients.html">Deportes</a></li>
+											<li><a href="clients.html">Cultural</a></li>
+											<li><a href="clients.html">Sociales</a></li>
+											<li><a href="clients.html">Avisos</a></li>
+										</ul>
+									</li>
+									<li><a href="#" class="has-submenu">Noticias</a>
+										<ul class="sub-menu">
+											<li><a href="blog.html">Recientes</a></li>
+											<li><a href="blog-grid.html">Pasadas</a></li>
+					
+										</ul>
+									</li>
+									<li><a href="about.html">Acerca de nosotros</a></li>
+	
+									</li>
+									<li><a href="contact.html">Contacto</a></li>
+
+
+
+            </ul>
+          </div>
+          <div class="spacing"></div>
+        </div>
+        <div class="col-md-3">
+          <div class="spacing"></div>
+          <div class="links">
+           
+          </div>
+          <div class="spacing"></div>
+        </div>
+        <div class="col-md-3">
+          <div class="spacing"></div>
+          <h4>Email </h4>
+          <p>Pongase en contacto con nosotros </p>
+          <form>
+            <input class="email-address" placeholder="Deje su mensaje" type="text">
+            <input class="button boxed small" type="submit">
+          </form>
+          <div class="spacing"></div>
+        </div>
+      </div>
+	  </div>
+      <div class="two spacing"></div>
+    </footer>
+				
+						<a href="#" class="go-top"><i class="fa fa-angle-up"></i></a>
+
+			</div>
+
+		</div>
+
+		<nav class="sidebar-menu slide-from-left">
+			<div class="nano">
+				<div class="content">
+					<nav class="responsive-menu">
+						<ul>
+							<li><a href="<?php echo base_url();?>index.php/periodico/index">Inicio</a></li>
+							<li class="menu-item-has-children"><a href="#">Secciones</a>
+								<ul class="sub-menu">
+								<li><a href="services.html">Noticia general</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/policiaco">Policiaco</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/deportes">Deportes</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/cultural">Cultural</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/social">Sociales</a></li>
+											<li><a href="<?php echo base_url();?>index.php/periodico/aviso">Avisos</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children"><a href="#">Noticias</a>
+								<ul class="sub-menu">
+									<li><a href="<?php echo base_url();?>index.php/periodico/noticianu">Recientes</a></li>
+									<li><a href="<?php echo base_url();?>index.php/periodico/noticiapa">Pasadas</a></li>
+					
+								</ul>
+							</li>
+									<li><a href="<?php echo base_url();?>index.php/periodico/sobre">Acerca de nosotros</a></li>
+	
+									</li>
+									<li><a href="<?php echo base_url();?>index.php/periodico/contacto">Contacto</a></li>
+								</ul>
+					</nav>
+				</div>
+			</div>
+		</nav>
+
+	</div>
+	
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="<?php echo base_url();?>files/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>files/js/bootstrap.min.js"></script>
+	<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script src="<?php echo base_url();?>files/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="<?php echo base_url();?>files/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+	<script type="text/javascript" src="<?php echo base_url();?>files/js/plugins.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>files/js/custom.js"></script>
+
+</body>
+</html>
